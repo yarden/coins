@@ -35,7 +35,7 @@ def make_data(num_coins, num_obs_per_coin,
 num_coins = 10
 num_obs_per_coin = 20
 # true parameters of our Beta
-alpha_1, alpha_2 = 0.5, 0.5
+alpha_1, alpha_2 = 10., 10.
 data = make_data(num_coins, num_obs_per_coin, alpha_1, alpha_2)
 # summarize data as number of heads
 data = data[:, 0]
@@ -47,7 +47,10 @@ num_samples = 1000
 
 # need a prior on alpha_1, alpha_2
 # parameterized by these hyperparameters
-hyper_left, hyper_right = 1, 1
+#hyper_left, hyper_right = 1, 1
+
+# Uniform prior
+unif_low, unif_high = 0., 20.
 
 # our model assumes that the number of observations
 # per coin is fixed; but this can be easily modeled
@@ -57,8 +60,13 @@ trace = None
 with pm.Model() as peshkin:
     # Prior on parameters of Beta (which represents a *population*
     # of coin weights)
-    alpha_left = pm.Beta("alpha_left", alpha=hyper_left, beta=hyper_right)
-    alpha_right = pm.Beta("alpha_right", alpha=hyper_left, beta=hyper_right)
+    # Beta prior
+    #alpha_left = pm.Beta("alpha_left", alpha=hyper_left, beta=hyper_right)
+    #alpha_right = pm.Beta("alpha_right", alpha=hyper_left, beta=hyper_right)
+
+    # Uniform prior
+    alpha_left = pm.Uniform("alpha_left", unif_low, unif_high)
+    alpha_right = pm.Uniform("alpha_right", unif_low, unif_high)
     # Now we're going to *vector of coin weights*, each
     # corresponding to our coin
     coin_weights = pm.Beta("coin_weights",
