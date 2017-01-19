@@ -35,7 +35,8 @@ def make_data(num_coins, num_obs_per_coin,
 num_coins = 10
 num_obs_per_coin = 20
 # true parameters of our Beta
-alpha_1, alpha_2 = 0.5, 0.5
+#alpha_1, alpha_2 = 0.5, 0.5
+alpha_1, alpha_2 = 5, 1
 data = make_data(num_coins, num_obs_per_coin, alpha_1, alpha_2)
 # summarize data as number of heads
 data = data[:, 0]
