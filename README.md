@@ -1,6 +1,6 @@
 # A hierarchical coin inference model
 
-## by Yarden Katz (yarden at hms dot harvard dot edu)
+## by Yarden Katz
 
 In honor of Leon Peshkin.
 
